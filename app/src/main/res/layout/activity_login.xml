@@ -54,15 +54,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textName" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/loginEmail"
+        android:id="@+id/loginUsername"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
-        android:hint="Email"
-        android:transitionName="catbot_email"
+        android:hint="Username"
+        android:transitionName="catbot_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSlogan">
@@ -86,7 +86,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginEmail">
+        app:layout_constraintTop_toBottomOf="@+id/loginUsername">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

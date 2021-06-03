@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
     Button btnLogin, btnGoRegister;
     ImageView ivHero;
     TextView tvName, tvSlogan;
-    TextInputLayout tilEmail, tilPassword;
+    TextInputLayout tilUsername, tilPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,24 @@ public class Login extends AppCompatActivity {
         ivHero = findViewById(R.id.imageHero);
         tvName = findViewById(R.id.textName);
         tvSlogan = findViewById(R.id.textSlogan);
-        tilEmail = findViewById(R.id.loginEmail);
+        tilUsername = findViewById(R.id.loginUsername);
         tilPassword = findViewById(R.id.loginPassword);
         btnLogin = findViewById(R.id.buttonLogin);
         btnGoRegister = findViewById(R.id.buttonGoRegister);
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("catUsers");
     }
 
-    private boolean validateEmail() {
-        String Validate = tilEmail.getEditText().getText().toString();
+    private boolean validateUsername() {
+        String Validate = tilUsername.getEditText().getText().toString();
 
         if (Validate.isEmpty()) {
-            tilEmail.setError("Cannot be Empty");
+            tilUsername.setError("Cannot be Empty");
             return false;
         } else {
-            tilEmail.setError(null);
-            tilEmail.setErrorEnabled(false);
+            tilUsername.setError(null);
+            tilUsername.setErrorEnabled(false);
             return true;
         }
     }
@@ -73,7 +76,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void loginUsers(View view) {
-        if (!validateEmail() | !validatePassword()) {
+        if (!validateUsername() | !validatePassword()) {
             return;
         } else {
             isUser();
@@ -81,26 +84,26 @@ public class Login extends AppCompatActivity {
     }
 
     private void isUser() {
-        final String userEnteredEmail = tilEmail.getEditText().getText().toString().trim();
+        final String userEnteredUsername = tilUsername.getEditText().getText().toString().trim();
         final String userEnteredPassword = tilPassword.getEditText().getText().toString().trim();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("catUsers");
-        Query checkUser = reference.orderByChild("email").equalTo(userEnteredEmail);
+        reference = FirebaseDatabase.getInstance().getReference("catUsers");
+        Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    tilEmail.setError(null);
-                    tilEmail.setErrorEnabled(false);
+                    tilUsername.setError(null);
+                    tilUsername.setErrorEnabled(false);
 
-                    String passwordFromFB = snapshot.child(userEnteredPassword).child("password").getValue(String.class);
+                    String passwordFromFB = snapshot.child(userEnteredUsername).child("password").getValue(String.class);
                     if (passwordFromFB.equals(userEnteredPassword)) {
-                        tilEmail.setError(null);
-                        tilEmail.setErrorEnabled(false);
+                        tilUsername.setError(null);
+                        tilUsername.setErrorEnabled(false);
 
-                        String usernameFromFB = snapshot.child(userEnteredEmail).child("username").getValue(String.class);
-                        String emailFromFB = snapshot.child(userEnteredEmail).child("email").getValue(String.class);
+                        String usernameFromFB = snapshot.child(userEnteredUsername).child("username").getValue(String.class);
+                        String emailFromFB = snapshot.child(userEnteredUsername).child("email").getValue(String.class);
 
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
                         intent.putExtra("username", usernameFromFB);
@@ -113,8 +116,8 @@ public class Login extends AppCompatActivity {
                         tilPassword.requestFocus();
                     }
                 } else {
-                    tilEmail.setError("No such User Exist");
-                    tilEmail.requestFocus();
+                    tilUsername.setError("No such User Exist");
+                    tilUsername.requestFocus();
                 }
             }
 
@@ -132,7 +135,7 @@ public class Login extends AppCompatActivity {
         pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
         pairs[1] = new Pair<View, String>(tvName, "catbot_text_name");
         pairs[2] = new Pair<View, String>(tvSlogan, "catbot_text_slogan");
-        pairs[3] = new Pair<View, String>(tilEmail, "catbot_input_email");
+        pairs[3] = new Pair<View, String>(tilUsername, "catbot_input_username");
         pairs[4] = new Pair<View, String>(tilPassword, "catbot_input_password");
         pairs[5] = new Pair<View, String>(btnLogin, "catbot_button_loginregister");
         pairs[6] = new Pair<View, String>(btnGoRegister, "catbot_button_already");

@@ -45,21 +45,6 @@ public class Register extends AppCompatActivity {
         tilPassword = findViewById(R.id.registerPassword);
         btnRegister = findViewById(R.id.buttonRegister);
         btnGoLogin = findViewById(R.id.buttonGoLogin);
-
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("catUsers");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    AutoIncrement = snapshot.getChildrenCount();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
     }
 
     private boolean validateUsername() {
@@ -118,12 +103,15 @@ public class Register extends AppCompatActivity {
         if (!validateUsername() | !validateEmail() | !validatePassword()) {
             return;
         }
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("catUsers");
 
         String Username = tilUsername.getEditText().getText().toString();
         String Email = tilEmail.getEditText().getText().toString();
         String Password = tilPassword.getEditText().getText().toString();
         UserHelper helper = new UserHelper(Username, Email, Password);
-        reference.child(String.valueOf(AutoIncrement + 1)).setValue(helper);
+
+        reference.child(Username).setValue(helper);
     }
 
     public void callLogin(View view) {
