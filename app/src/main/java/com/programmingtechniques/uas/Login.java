@@ -54,6 +54,7 @@ public class Login extends AppCompatActivity {
             return false;
         } else {
             tilEmail.setError(null);
+            tilEmail.setErrorEnabled(false);
             return true;
         }
     }
@@ -66,6 +67,7 @@ public class Login extends AppCompatActivity {
             return false;
         } else {
             tilPassword.setError(null);
+            tilPassword.setErrorEnabled(false);
             return true;
         }
     }
@@ -92,20 +94,18 @@ public class Login extends AppCompatActivity {
                     tilEmail.setError(null);
                     tilEmail.setErrorEnabled(false);
 
-                    String passwordFromFirebase = snapshot.child(userEnteredEmail).child("password").getValue(String.class);
-
-                    if (passwordFromFirebase.equals(userEnteredPassword)) {
+                    String passwordFromFB = snapshot.child(userEnteredPassword).child("password").getValue(String.class);
+                    if (passwordFromFB.equals(userEnteredPassword)) {
                         tilEmail.setError(null);
                         tilEmail.setErrorEnabled(false);
 
-                        String usernameFromFirebase = snapshot.child(userEnteredEmail).child("username").getValue(String.class);
-                        String emailFromFirebase = snapshot.child(userEnteredEmail).child("email").getValue(String.class);
+                        String usernameFromFB = snapshot.child(userEnteredEmail).child("username").getValue(String.class);
+                        String emailFromFB = snapshot.child(userEnteredEmail).child("email").getValue(String.class);
 
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
-
-                        intent.putExtra("username", usernameFromFirebase);
-                        intent.putExtra("email", emailFromFirebase);
-                        intent.putExtra("password", passwordFromFirebase);
+                        intent.putExtra("username", usernameFromFB);
+                        intent.putExtra("email", emailFromFB);
+                        intent.putExtra("password", passwordFromFB);
 
                         startActivity(intent);
                     } else {
@@ -128,15 +128,14 @@ public class Login extends AppCompatActivity {
     public void callRegister(View view) {
         Intent intent = new Intent(Login.this, Register.class);
 
-        Pair[] pairs = new Pair[8];
+        Pair[] pairs = new Pair[7];
         pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
         pairs[1] = new Pair<View, String>(tvName, "catbot_text_name");
         pairs[2] = new Pair<View, String>(tvSlogan, "catbot_text_slogan");
-        pairs[3] = new Pair<View, String>(tilPassword, "catbot_input_username");
-        pairs[4] = new Pair<View, String>(tilEmail, "catbot_input_email");
-        pairs[5] = new Pair<View, String>(tilPassword, "catbot_input_password");
-        pairs[6] = new Pair<View, String>(btnLogin, "catbot_button_loginregister");
-        pairs[7] = new Pair<View, String>(btnGoRegister, "catbot_button_already");
+        pairs[3] = new Pair<View, String>(tilEmail, "catbot_input_email");
+        pairs[4] = new Pair<View, String>(tilPassword, "catbot_input_password");
+        pairs[5] = new Pair<View, String>(btnLogin, "catbot_button_loginregister");
+        pairs[6] = new Pair<View, String>(btnGoRegister, "catbot_button_already");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);

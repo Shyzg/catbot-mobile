@@ -7,18 +7,4 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
-        android:id="@+id/bottom_navigation_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:layout_margin="30dp"
-        android:background="@drawable/round_corners"
-        android:elevation="8dp"
-        app:cnb_menuResource="@menu/bottom_navigation"
-        app:cnb_orientationMode="horizontal"
-        app:cnb_radius="10dp"
-        app:cnb_unselectedColor="@color/white" />
-
 </RelativeLayout>
