@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "873651686266",
+    "firebase_url": "https://uasprogrammingtechniques-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "uasprogrammingtechniques",
+    "storage_bucket": "uasprogrammingtechniques.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873651686266:android:10cd91034547b2489364c3",
+        "android_client_info": {
+          "package_name": "com.programmingtechniques.uas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873651686266-02gr6d8fej0msmduesvtcg048e56hjv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9e7xTSI733H8fn60kx7KRuVYjRrkZt2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873651686266-02gr6d8fej0msmduesvtcg048e56hjv1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

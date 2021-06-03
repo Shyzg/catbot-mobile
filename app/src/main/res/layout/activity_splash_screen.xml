@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/catbot_background_2"
+    tools:context=".SplashScreen">
+
+    <ImageView
+        android:id="@+id/imageHero"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="64dp"
+        android:transitionName="catbot_hero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/catbot_hero_11a" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="CatBot"
+        android:textSize="48dp"
+        android:transitionName="catbot_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageHero"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/comfortaa"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="Change Your Discord Bot Settings."
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textName" />
+</androidx.constraintlayout.widget.ConstraintLayout>
