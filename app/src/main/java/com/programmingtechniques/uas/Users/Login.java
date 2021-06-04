@@ -1,16 +1,16 @@
-package com.programmingtechniques.uas;
+package com.programmingtechniques.uas.Users;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,14 +21,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.programmingtechniques.uas.Profile;
+import com.programmingtechniques.uas.R;
 
 public class Login extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
-    Button btnLogin, btnGoRegister;
+    Animation topAnim, bottomAnim;
+    Button btnLogin, btnLupaKataSandi;
     ImageView ivHero;
     TextView tvName, tvSlogan;
+    CheckBox cbRememberMe;
     TextInputLayout tilUsername, tilPassword;
 
     @Override
@@ -40,13 +44,16 @@ public class Login extends AppCompatActivity {
         ivHero = findViewById(R.id.imageHero);
         tvName = findViewById(R.id.textName);
         tvSlogan = findViewById(R.id.textSlogan);
-        tilUsername = findViewById(R.id.loginUsername);
+        tilUsername = findViewById(R.id.loginEmail);
         tilPassword = findViewById(R.id.loginPassword);
+        cbRememberMe = findViewById(R.id.checkboxIngatAku);
+        btnLupaKataSandi = findViewById(R.id.buttonLupaKataSandi);
         btnLogin = findViewById(R.id.buttonLogin);
-        btnGoRegister = findViewById(R.id.buttonGoRegister);
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("catUsers");
+
+        animationLayout();
     }
 
     private boolean validateUsername() {
@@ -128,21 +135,19 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void callRegister(View view) {
-        Intent intent = new Intent(Login.this, Register.class);
+    public void animationLayout() {
+//        Animation
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-        Pair[] pairs = new Pair[7];
-        pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
-        pairs[1] = new Pair<View, String>(tvName, "catbot_text_name");
-        pairs[2] = new Pair<View, String>(tvSlogan, "catbot_text_slogan");
-        pairs[3] = new Pair<View, String>(tilUsername, "catbot_input_username");
-        pairs[4] = new Pair<View, String>(tilPassword, "catbot_input_password");
-        pairs[5] = new Pair<View, String>(btnLogin, "catbot_button_loginregister");
-        pairs[6] = new Pair<View, String>(btnGoRegister, "catbot_button_already");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);
-            startActivity(intent, options.toBundle());
-        }
+//        Set Animation
+        ivHero.setAnimation(topAnim);
+        tvName.setAnimation(topAnim);
+        tvSlogan.setAnimation(topAnim);
+        tilUsername.setAnimation(topAnim);
+        tilPassword.setAnimation(topAnim);
+        cbRememberMe.setAnimation(bottomAnim);
+        btnLupaKataSandi.setAnimation(bottomAnim);
+        btnLogin.setAnimation(bottomAnim);
     }
 }

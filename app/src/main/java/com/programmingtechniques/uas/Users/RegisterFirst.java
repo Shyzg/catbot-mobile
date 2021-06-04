@@ -1,6 +1,5 @@
-package com.programmingtechniques.uas;
+package com.programmingtechniques.uas.Users;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -10,31 +9,31 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.programmingtechniques.uas.R;
 
-public class Register extends AppCompatActivity {
+public class RegisterFirst extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
-    Button btnRegister, btnGoLogin;
+    Animation topAnim, bottomAnim;
+    Button btnRegister;
     ImageView ivHero;
     TextView tvName, tvSlogan;
     TextInputLayout tilUsername, tilEmail, tilPassword;
-    long AutoIncrement = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_first);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         ivHero = findViewById(R.id.imageHero);
@@ -44,7 +43,8 @@ public class Register extends AppCompatActivity {
         tilEmail = findViewById(R.id.registerEmail);
         tilPassword = findViewById(R.id.registerPassword);
         btnRegister = findViewById(R.id.buttonRegister);
-        btnGoLogin = findViewById(R.id.buttonGoLogin);
+
+        animationLayout();
     }
 
     private boolean validateUsername() {
@@ -112,24 +112,23 @@ public class Register extends AppCompatActivity {
         UserHelper helper = new UserHelper(Username, Email, Password);
 
         reference.child(Username).setValue(helper);
+
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
     }
 
-    public void callLogin(View view) {
-        Intent intent = new Intent(Register.this, Login.class);
+    public void animationLayout() {
+//        Animation
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-        Pair[] pairs = new Pair[8];
-        pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
-        pairs[1] = new Pair<View, String>(tvName, "catbot_text_name");
-        pairs[2] = new Pair<View, String>(tvSlogan, "catbot_text_slogan");
-        pairs[3] = new Pair<View, String>(tilPassword, "catbot_input_username");
-        pairs[4] = new Pair<View, String>(tilEmail, "catbot_input_email");
-        pairs[5] = new Pair<View, String>(tilPassword, "catbot_input_password");
-        pairs[6] = new Pair<View, String>(btnRegister, "catbot_button_loginregister");
-        pairs[7] = new Pair<View, String>(btnGoLogin, "catbot_button_already");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Register.this, pairs);
-            startActivity(intent, options.toBundle());
-        }
+//        Set Animation
+        ivHero.setAnimation(topAnim);
+        tvName.setAnimation(topAnim);
+        tvSlogan.setAnimation(topAnim);
+        tilUsername.setAnimation(bottomAnim);
+        tilEmail.setAnimation(bottomAnim);
+        tilPassword.setAnimation(bottomAnim);
+        btnRegister.setAnimation(bottomAnim);
     }
 }

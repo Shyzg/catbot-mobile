@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/catbot_background_9"
+    tools:context=".Users.Welcome">
+
+    <ImageView
+        android:id="@+id/imageHero"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="64dp"
+        android:contentDescription="@string/app_name"
+        android:transitionName="catbot_hero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/catbot_hero_1b" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/comfortaa_bold"
+        android:shadowColor="@color/black"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="@string/welcomeName"
+        android:textSize="36sp"
+        android:transitionName="catbot_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageHero"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textSlogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/comfortaa"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:text="@string/welcomeSlogan"
+        android:textSize="14sp"
+        android:transitionName="catbot_slogan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="58dp"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSlogan">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:onClick="callLogin"
+            android:text="@string/buttonMasuk"
+            android:transitionName="catbot_button_masuk"
+            app:backgroundTint="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonGoRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:onClick="callRegister"
+            android:text="@string/buttonDaftar"
+            android:transitionName="catbot_button_daftar"
+            app:backgroundTint="@color/black" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

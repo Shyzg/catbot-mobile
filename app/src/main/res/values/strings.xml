@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">UAS</string>
-    <string name="home">Home</string>
-    <string name="commands">Commands</string>
+    <string name="app_name">CatBot</string>
     <string name="profile">Profile</string>
+    <string name="slogan">Atur Bot Ini Dalam Server Discordmu!</string>
+    <string name="loginName">Selamat Datang!</string>
+    <string name="loginSlogan">Masuk Kedalam Akunmu Untuk Melanjutkan…</string>
+    <string name="loginHintEmail">Email</string>
+    <string name="loginHintPassword">Password</string>
+    <string name="loginButtonName">Masuk</string>
+    <string name="loginButtonGoRegister">Belum Memiliki Akun? Daftar Disini.</string>
+    <string name="welcomeName">Atur CatBot Ini</string>
+    <string name="welcomeSlogan">Yang Berada Didalam Sever Discord-mu!</string>
+    <string name="buttonMasuk">Masuk</string>
+    <string name="buttonDaftar">Daftar</string>
+    <string name="checkboxRememberMe">Ingat Aku</string>
+    <string name="buttonLupaKataSandi">Lupa Kata Sandi?</string>
 </resources>

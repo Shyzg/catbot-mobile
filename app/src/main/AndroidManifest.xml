@@ -16,9 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
+        <activity android:name=".Users.Welcome" />
+        <activity android:name=".Users.Login" />
+        <activity android:name=".Users.RegisterFirst" />
+        <activity android:name=".Users.RegisterThird" />
+        <activity android:name=".Users.RegisterSecond" />
         <activity android:name=".Profile" />
-        <activity android:name=".Register" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,4 +1,4 @@
-package com.programmingtechniques.uas;
+package com.programmingtechniques.uas.Users;
 
 public class UserHelper {
     String Username, Email, Password;
