@@ -85,7 +85,7 @@ public class Verification extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(getApplicationContext(), "Verifikasi Kode Salah!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Kode Verifikasi Salah!", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -119,23 +119,26 @@ public class Verification extends AppCompatActivity {
 
     public void callVerifikasi(View view) {
         String kode = pvDariUser.getText().toString().trim();
-        if (!kode.isEmpty()) {
+        if (kode.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Masukkan Kode Verifikasi!", Toast.LENGTH_SHORT).show();
+        } else if (kode.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Harap Memasukkan 6 Digit Kode!", Toast.LENGTH_SHORT).show();
+        } else {
             pvDariUser.setText(kode);
             verifikasiKode(kode);
-        }
+            Intent intent = new Intent(getApplicationContext(), Login.class);
 
-        Intent intent = new Intent(getApplicationContext(), Login.class);
+            Pair[] pairs = new Pair[3];
+            pairs[0] = new Pair<View, String>(findViewById(R.id.imageHero), "catbot_image_hero");
+            pairs[1] = new Pair<View, String>(findViewById(R.id.textNama), "catbot_text_nama");
+            pairs[2] = new Pair<View, String>(findViewById(R.id.textDeskripsi), "catbot_text_deskripsi");
 
-        Pair[] pairs = new Pair[3];
-        pairs[0] = new Pair<View, String>(findViewById(R.id.imageHero), "catbot_image_hero");
-        pairs[1] = new Pair<View, String>(findViewById(R.id.textNama), "catbot_text_nama");
-        pairs[2] = new Pair<View, String>(findViewById(R.id.textDeskripsi), "catbot_text_deskripsi");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Verification.this, pairs);
-            startActivity(intent, options.toBundle());
-        } else {
-            startActivity(intent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Verification.this, pairs);
+                startActivity(intent, options.toBundle());
+            } else {
+                startActivity(intent);
+            }
         }
     }
 }

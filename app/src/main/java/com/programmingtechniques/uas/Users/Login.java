@@ -27,13 +27,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.programmingtechniques.uas.Menu.Profile;
 import com.programmingtechniques.uas.R;
-import com.programmingtechniques.uas.Session;
 
 import java.util.HashMap;
 
 public class Login extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    Session session;
     Animation bottomAnim;
     ImageView ivHero;
     TextView tvNama, tvDeskripsi;
@@ -119,8 +119,8 @@ public class Login extends AppCompatActivity {
         final String userKataSandi = tilKataSandi.getEditText().getText().toString().trim();
 
         if (cbIngatAku.isChecked()) {
-            Session session = new Session(Login.this, Session.SESSION_REMEMBER_ME);
-            session.createRememberMeSession(userNamaPengguna, userKataSandi);
+            session = new Session(Login.this, Session.SESSION_REMEMBER_ME);
+            Session.createRememberMeSession(userNamaPengguna, userKataSandi);
         }
 
         Query checkUser = FirebaseDatabase.getInstance().getReference("catUsers").orderByChild("namaPengguna").equalTo(userNamaPengguna);
@@ -141,6 +141,9 @@ public class Login extends AppCompatActivity {
                         String userKataSandi = snapshot.child(userNamaPengguna).child("kataSandi").getValue(String.class);
                         String nomorHandphoneFromFB = snapshot.child(userNamaPengguna).child("nomorHandphone").getValue(String.class);
 
+                        session = new Session(Login.this, Session.SESSION_USER_LOGIN);
+                        Session.createUserLoginSession(userNamaPengguna, surelFromFB, userKataSandi, nomorHandphoneFromFB);
+
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
 
                         intent.putExtra("surel", surelFromFB);
@@ -149,6 +152,7 @@ public class Login extends AppCompatActivity {
                         intent.putExtra("kataSandi", userKataSandi);
 
                         startActivity(intent);
+                        finish();
                     } else {
                         tilKataSandi.setError("Kata Sandi Salah");
                         tilKataSandi.requestFocus();

@@ -17,8 +17,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.programmingtechniques.uas.R;
+import com.programmingtechniques.uas.Users.Session;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
 
 public class Profile extends AppCompatActivity {
     ImageView ivHero;
@@ -26,6 +28,7 @@ public class Profile extends AppCompatActivity {
     TextView tvNama;
     String namaPengguna, surel, kataSandi, nomorHandphone;
     DatabaseReference databaseReference;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         databaseReference = FirebaseDatabase.getInstance().getReference("catUsers");
         Intent intent = getIntent();
+        Session session = new Session(Profile.this, Session.SESSION_USER_LOGIN);
+        HashMap<String, String> userDetail = session.getUserLoginFromSession();
 //        Hooks
         ivHero = findViewById(R.id.imageHero);
         tvNama = findViewById(R.id.textNama);
@@ -42,10 +47,10 @@ public class Profile extends AppCompatActivity {
         tilKataSandi = findViewById(R.id.profileInputKataSandi);
         tilNomorHandphone = findViewById(R.id.profileInputNomorHandphone);
 //        Dapetin Data Dari Firebase
-        namaPengguna = intent.getStringExtra("namaPengguna");
-        surel = intent.getStringExtra("surel");
-        kataSandi = intent.getStringExtra("kataSandi");
-        nomorHandphone = intent.getStringExtra("nomorHandphone");
+        namaPengguna = userDetail.get(Session.KEY_NAMAPENGGUNA);
+        surel = userDetail.get(Session.KEY_SUREL);
+        kataSandi = userDetail.get(Session.KEY_KATASANDI);
+        nomorHandphone = userDetail.get(Session.KEY_NOMORHANDPHONE);
 //        Munculin Data Dari Firebase
         tvNama.setText(MessageFormat.format("Hai {0}! Kamu Dapat Merubah Data Pada Akunmu Disini.", namaPengguna));
         tilNamaPengguna.getEditText().setText(namaPengguna);
