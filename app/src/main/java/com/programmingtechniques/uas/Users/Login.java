@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.programmingtechniques.uas.Menu.Profile;
 import com.programmingtechniques.uas.R;
+import com.programmingtechniques.uas.Session;
+
+import java.util.HashMap;
 
 public class Login extends AppCompatActivity {
     FirebaseDatabase rootNode;
@@ -34,6 +38,7 @@ public class Login extends AppCompatActivity {
     ImageView ivHero;
     TextView tvNama, tvDeskripsi;
     TextInputLayout tilNamaPengguna, tilKataSandi;
+    TextInputEditText tietNamaPengguna, tietKataSandi;
     CheckBox cbIngatAku;
     Button btnMasuk, btnLupaKataSandi, btnCallRegister;
 
@@ -48,6 +53,8 @@ public class Login extends AppCompatActivity {
         tvDeskripsi = findViewById(R.id.textDeskripsi);
         tilNamaPengguna = findViewById(R.id.inputLoginNamaPengguna);
         tilKataSandi = findViewById(R.id.inputLoginKataSandi);
+        tietNamaPengguna = findViewById(R.id.textLoginNamaPengguna);
+        tietKataSandi = findViewById(R.id.textLoginKataSandi);
         cbIngatAku = findViewById(R.id.checkboxIngatAku);
         btnLupaKataSandi = findViewById(R.id.buttonLupaKataSandi);
         btnMasuk = findViewById(R.id.buttonMasuk);
@@ -64,6 +71,13 @@ public class Login extends AppCompatActivity {
         btnLupaKataSandi.setAnimation(bottomAnim);
         btnMasuk.setAnimation(bottomAnim);
         btnCallRegister.setAnimation(bottomAnim);
+
+        Session session = new Session(Login.this, Session.SESSION_REMEMBER_ME);
+        if (session.checkRememberMe()) {
+            HashMap<String, String> detailRememberMe = session.getRememberMeFromSession();
+            tietNamaPengguna.setText(detailRememberMe.get(Session.KEY_SESSION_NAMAPENGGUNA));
+            tietKataSandi.setText(detailRememberMe.get(Session.KEY_SESSION_KATASANDI));
+        }
     }
 
     private boolean validasiSurel() {
@@ -101,11 +115,15 @@ public class Login extends AppCompatActivity {
     }
 
     private void isUser() {
-        final String userEnteredNamaPengguna = tilNamaPengguna.getEditText().getText().toString().trim();
-        final String userEnteredPassword = tilKataSandi.getEditText().getText().toString().trim();
+        final String userNamaPengguna = tilNamaPengguna.getEditText().getText().toString().trim();
+        final String userKataSandi = tilKataSandi.getEditText().getText().toString().trim();
 
-        Query checkUser = FirebaseDatabase.getInstance().getReference("catUsers").orderByChild("namaPengguna").equalTo(userEnteredNamaPengguna);
+        if (cbIngatAku.isChecked()) {
+            Session session = new Session(Login.this, Session.SESSION_REMEMBER_ME);
+            session.createRememberMeSession(userNamaPengguna, userKataSandi);
+        }
 
+        Query checkUser = FirebaseDatabase.getInstance().getReference("catUsers").orderByChild("namaPengguna").equalTo(userNamaPengguna);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -113,21 +131,22 @@ public class Login extends AppCompatActivity {
                     tilNamaPengguna.setError(null);
                     tilNamaPengguna.setErrorEnabled(false);
 
-                    String passwordFromFB = snapshot.child(userEnteredNamaPengguna).child("kataSandi").getValue(String.class);
-                    if (passwordFromFB.equals(userEnteredPassword)) {
+                    String passwordFromFB = snapshot.child(userNamaPengguna).child("kataSandi").getValue(String.class);
+                    if (passwordFromFB.equals(userKataSandi)) {
                         tilKataSandi.setError(null);
                         tilKataSandi.setErrorEnabled(false);
 
-                        String namaPenggunaFromFB = snapshot.child(userEnteredNamaPengguna).child("namaPengguna").getValue(String.class);
-                        String surelFromFB = snapshot.child(userEnteredNamaPengguna).child("surel").getValue(String.class);
-                        String nomorHandphoneFromFB = snapshot.child(userEnteredNamaPengguna).child("nomorHandphone").getValue(String.class);
+                        String namaPenggunaFromFB = snapshot.child(userNamaPengguna).child("namaPengguna").getValue(String.class);
+                        String surelFromFB = snapshot.child(userNamaPengguna).child("surel").getValue(String.class);
+                        String userKataSandi = snapshot.child(userNamaPengguna).child("kataSandi").getValue(String.class);
+                        String nomorHandphoneFromFB = snapshot.child(userNamaPengguna).child("nomorHandphone").getValue(String.class);
 
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
 
                         intent.putExtra("surel", surelFromFB);
                         intent.putExtra("namaPengguna", namaPenggunaFromFB);
                         intent.putExtra("nomorHandphone", nomorHandphoneFromFB);
-                        intent.putExtra("kataSandi", passwordFromFB);
+                        intent.putExtra("kataSandi", userKataSandi);
 
                         startActivity(intent);
                     } else {

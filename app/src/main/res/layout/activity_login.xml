@@ -72,6 +72,7 @@
         app:startIconDrawable="@drawable/catbot_icon_user">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textLoginNamaPengguna"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -96,6 +97,7 @@
         app:startIconDrawable="@drawable/catbot_icon_key">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textLoginKataSandi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
@@ -110,9 +112,12 @@
         android:fontFamily="@font/comfortaa_bold"
         android:text="@string/checkboxIngatAku"
         android:textColor="@color/black"
+        android:textColorHighlight="@color/black"
+        android:textColorLink="@color/black"
         android:transitionName="catbot_checkbox_ingataku"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLoginKataSandi" />
+        app:layout_constraintTop_toBottomOf="@+id/inputLoginKataSandi"
+        app:useMaterialThemeColors="true" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonLupaKataSandi"
