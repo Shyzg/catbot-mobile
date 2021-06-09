@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/catbot_background_7"
+    android:background="@drawable/catbot_background_splashscreen"
     tools:context=".SplashScreen">
 
     <ImageView
@@ -15,14 +15,14 @@
         android:layout_marginTop="128dp"
         android:layout_marginEnd="64dp"
         android:contentDescription="@string/app_name"
-        android:transitionName="catbot_hero"
+        android:transitionName="catbot_image_hero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/catbot_hero_1b" />
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/textNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -33,9 +33,8 @@
         android:shadowRadius="3"
         android:text="@string/app_name"
         android:textSize="48sp"
-        android:transitionName="catbot_name"
+        android:transitionName="catbot_text_nama"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageHero"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageHero" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/catbot_background_9"
-    tools:context=".Users.Welcome">
+    android:background="@drawable/catbot_background_welcome"
+    tools:context=".Welcome">
 
     <ImageView
         android:id="@+id/imageHero"
@@ -15,14 +15,14 @@
         android:layout_marginTop="128dp"
         android:layout_marginEnd="64dp"
         android:contentDescription="@string/app_name"
-        android:transitionName="catbot_hero"
+        android:transitionName="catbot_image_hero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/catbot_hero_1b" />
+        app:srcCompat="@drawable/catbot_hero_1a" />
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/textNama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -31,16 +31,15 @@
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="3"
-        android:text="@string/welcomeName"
+        android:text="@string/welcomeTextNama"
         android:textSize="36sp"
-        android:transitionName="catbot_name"
+        android:transitionName="catbot_text_nama"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageHero"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageHero" />
 
     <TextView
-        android:id="@+id/textSlogan"
+        android:id="@+id/textDeskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -49,12 +48,12 @@
         android:shadowDx="1"
         android:shadowDy="3"
         android:shadowRadius="3"
-        android:text="@string/welcomeSlogan"
+        android:text="@string/welcomeTextDeskripsi"
         android:textSize="14sp"
-        android:transitionName="catbot_slogan"
+        android:transitionName="catbot_text_deskripsi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textName" />
+        app:layout_constraintTop_toBottomOf="@+id/textNama" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,28 +63,28 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSlogan">
+        app:layout_constraintTop_toBottomOf="@+id/textDeskripsi">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonGoLogin"
+            android:id="@+id/buttonCallLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:onClick="callLogin"
             android:text="@string/buttonMasuk"
-            android:transitionName="catbot_button_masuk"
+            android:transitionName="catbot_button_calllogin"
             app:backgroundTint="@color/black" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonGoRegister"
+            android:id="@+id/buttonCallRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:onClick="callRegister"
             android:text="@string/buttonDaftar"
-            android:transitionName="catbot_button_daftar"
+            android:transitionName="catbot_button_callregister"
             app:backgroundTint="@color/black" />
     </LinearLayout>
 

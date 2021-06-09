@@ -4,178 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/catbot_background_5"
+    android:background="@drawable/catbot_background_profile"
     android:orientation="vertical"
-    tools:context=".Profile">
+    android:padding="32dp"
+    tools:context=".Menu.Profile">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="512dp"
-        android:layout_margin="32dp"
-        android:elevation="12dp"
-        app:cardBackgroundColor="#800D0D0D"
-        app:cardCornerRadius="16dp">
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cardBackgroundColor="#40F7F9F9"
+        app:cardCornerRadius="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/profileShowAvatar"
-                android:layout_width="match_parent"
-                android:layout_height="128dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:padding="112dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/avatar" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageHero"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_gravity="center_horizontal"
+                android:onClick="callHome"
+                android:transitionName="catbot_image_hero"
+                app:srcCompat="@drawable/catbot_hero_4" />
 
-            <TextView
-                android:id="@+id/profileTextHeader"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textNama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/comfortaa"
-                android:shadowColor="@color/white"
+                android:justificationMode="inter_word"
+                android:shadowColor="@color/black"
                 android:shadowDx="1"
                 android:shadowDy="3"
                 android:shadowRadius="5"
-                android:text="Change your Profile here"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/profileShowUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/comfortaa_bold"
-                android:shadowColor="@color/white"
-                android:shadowDx="1"
-                android:shadowDy="3"
-                android:shadowRadius="5"
-                android:text="Tokyo"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:transitionName="catbot_text_nama"
+                tools:targetApi="o" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileInputUsername"
+                android:id="@+id/profileInputNamaPengguna"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
-                android:padding="16dp"
-                android:transitionName="catbot_input_username"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_marginTop="16dp"
+                android:hint="@string/inputNamaPengguna"
+                app:boxStrokeColor="@color/black"
+                app:errorIconDrawable="@drawable/catbot_icon_error"
+                app:errorIconTint="@color/red_300"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/catbot_icon_user">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="tokyo" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileInputEmail"
+                android:id="@+id/profileInputSurel"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:padding="16dp"
-                android:transitionName="catbot_input_email"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerUsername">
+                android:layout_marginTop="16dp"
+                android:hint="@string/inputSurel"
+                app:boxStrokeColor="@color/black"
+                app:errorIconDrawable="@drawable/catbot_icon_error"
+                app:errorIconTint="@color/red_300"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/catbot_icon_at">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:text="tokyo@gmail.com" />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/profileInputPassword"
+                android:id="@+id/profileInputKataSandi"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
-                android:padding="16dp"
-                android:transitionName="catbot_input_password"
+                android:layout_marginTop="16dp"
+                android:hint="@string/inputKataSandi"
+                app:boxStrokeColor="@color/black"
                 app:endIconMode="password_toggle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:errorIconDrawable="@drawable/catbot_icon_error"
+                app:errorIconTint="@color/red_300"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/catbot_icon_key">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:text="1234" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profileInputNomorHandphone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/inputNomorHandphone"
+                app:boxStrokeColor="@color/black"
+                app:errorIconDrawable="@drawable/catbot_icon_error"
+                app:errorIconTint="@color/red_300"
+                app:hintTextColor="@color/black"
+                app:startIconDrawable="@drawable/catbot_icon_phone">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profileButtonUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/comfortaa_bold"
+                android:onClick="callUbah"
+                android:text="@string/buttonUbah"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/black"
+                app:cornerRadius="8dp" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/profileButtonUpdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="32dp"
-        android:background="@drawable/rounded_update"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="Update"
-        app:backgroundTint="#800D0D0D"
-        app:cornerRadius="8dp" />
-
-    <!--    <RelativeLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="256dp"-->
-    <!--        android:padding="16dp">-->
-
-    <!--        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--            android:id="@+id/catbot_avatar_profile"-->
-    <!--            android:layout_width="96dp"-->
-    <!--            android:layout_height="96dp"-->
-    <!--            android:layout_alignParentTop="true"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:layout_marginTop="44dp"-->
-    <!--            android:src="@drawable/avatar"-->
-    <!--            app:civ_border_color="#FF212121"-->
-    <!--            app:civ_border_width="3dp" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/catbot_welcome_profile"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentBottom="true"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:layout_marginBottom="44dp"-->
-    <!--            android:fontFamily="@font/comfortaa"-->
-    <!--            android:shadowColor="@color/black"-->
-    <!--            android:shadowDx="1"-->
-    <!--            android:shadowDy="3"-->
-    <!--            android:shadowRadius="3"-->
-    <!--            android:text="Selamat Datang Kembali,"-->
-    <!--            android:textSize="18dp" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/catbot_username_profile"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentBottom="true"-->
-    <!--            android:layout_centerInParent="true"-->
-    <!--            android:layout_marginBottom="8dp"-->
-    <!--            android:fontFamily="@font/comfortaa_bold"-->
-    <!--            android:shadowColor="@color/black"-->
-    <!--            android:shadowDx="1"-->
-    <!--            android:shadowDy="3"-->
-    <!--            android:shadowRadius="5"-->
-    <!--            android:text="Tokyo!"-->
-    <!--            android:textSize="24dp" />-->
-    <!--    </RelativeLayout>-->
 </LinearLayout>

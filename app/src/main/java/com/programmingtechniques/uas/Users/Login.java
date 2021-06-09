@@ -3,8 +3,11 @@ package com.programmingtechniques.uas.Users;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -21,69 +24,76 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.programmingtechniques.uas.Profile;
+import com.programmingtechniques.uas.Menu.Profile;
 import com.programmingtechniques.uas.R;
 
 public class Login extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
-    Animation topAnim, bottomAnim;
-    Button btnLogin, btnLupaKataSandi;
+    Animation bottomAnim;
     ImageView ivHero;
-    TextView tvName, tvSlogan;
-    CheckBox cbRememberMe;
-    TextInputLayout tilUsername, tilPassword;
+    TextView tvNama, tvDeskripsi;
+    TextInputLayout tilNamaPengguna, tilKataSandi;
+    CheckBox cbIngatAku;
+    Button btnMasuk, btnLupaKataSandi, btnCallRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+//        Hooks
         ivHero = findViewById(R.id.imageHero);
-        tvName = findViewById(R.id.textName);
-        tvSlogan = findViewById(R.id.textSlogan);
-        tilUsername = findViewById(R.id.loginEmail);
-        tilPassword = findViewById(R.id.loginPassword);
-        cbRememberMe = findViewById(R.id.checkboxIngatAku);
+        tvNama = findViewById(R.id.textNama);
+        tvDeskripsi = findViewById(R.id.textDeskripsi);
+        tilNamaPengguna = findViewById(R.id.inputLoginNamaPengguna);
+        tilKataSandi = findViewById(R.id.inputLoginKataSandi);
+        cbIngatAku = findViewById(R.id.checkboxIngatAku);
         btnLupaKataSandi = findViewById(R.id.buttonLupaKataSandi);
-        btnLogin = findViewById(R.id.buttonLogin);
-
+        btnMasuk = findViewById(R.id.buttonMasuk);
+        btnCallRegister = findViewById(R.id.buttonCallRegister);
+//        Panggil Firebase & Ambil Data Dari Table catUsers
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("catUsers");
-
-        animationLayout();
+//        Animation
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+//        Set Animation
+        tilNamaPengguna.setAnimation(bottomAnim);
+        tilKataSandi.setAnimation(bottomAnim);
+        cbIngatAku.setAnimation(bottomAnim);
+        btnLupaKataSandi.setAnimation(bottomAnim);
+        btnMasuk.setAnimation(bottomAnim);
+        btnCallRegister.setAnimation(bottomAnim);
     }
 
-    private boolean validateUsername() {
-        String Validate = tilUsername.getEditText().getText().toString();
+    private boolean validasiSurel() {
+        String Validate = tilNamaPengguna.getEditText().getText().toString();
 
         if (Validate.isEmpty()) {
-            tilUsername.setError("Cannot be Empty");
+            tilNamaPengguna.setError("Tidak Boleh Kosong");
             return false;
         } else {
-            tilUsername.setError(null);
-            tilUsername.setErrorEnabled(false);
+            tilNamaPengguna.setError(null);
+            tilNamaPengguna.setErrorEnabled(false);
             return true;
         }
     }
 
-    private boolean validatePassword() {
-        String Validate = tilPassword.getEditText().getText().toString();
+    private boolean validasiKataSandi() {
+        String Validate = tilKataSandi.getEditText().getText().toString();
 
         if (Validate.isEmpty()) {
-            tilPassword.setError("Cannot be Empty");
+            tilKataSandi.setError("Tidak Boleh Kosong");
             return false;
         } else {
-            tilPassword.setError(null);
-            tilPassword.setErrorEnabled(false);
+            tilKataSandi.setError(null);
+            tilKataSandi.setErrorEnabled(false);
             return true;
         }
     }
 
-    public void loginUsers(View view) {
-        if (!validateUsername() | !validatePassword()) {
+    public void loginUser(View view) {
+        if (!validasiSurel() | !validasiKataSandi()) {
             return;
         } else {
             isUser();
@@ -91,40 +101,42 @@ public class Login extends AppCompatActivity {
     }
 
     private void isUser() {
-        final String userEnteredUsername = tilUsername.getEditText().getText().toString().trim();
-        final String userEnteredPassword = tilPassword.getEditText().getText().toString().trim();
+        final String userEnteredNamaPengguna = tilNamaPengguna.getEditText().getText().toString().trim();
+        final String userEnteredPassword = tilKataSandi.getEditText().getText().toString().trim();
 
-        reference = FirebaseDatabase.getInstance().getReference("catUsers");
-        Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
+        Query checkUser = FirebaseDatabase.getInstance().getReference("catUsers").orderByChild("namaPengguna").equalTo(userEnteredNamaPengguna);
 
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    tilUsername.setError(null);
-                    tilUsername.setErrorEnabled(false);
+                    tilNamaPengguna.setError(null);
+                    tilNamaPengguna.setErrorEnabled(false);
 
-                    String passwordFromFB = snapshot.child(userEnteredUsername).child("password").getValue(String.class);
+                    String passwordFromFB = snapshot.child(userEnteredNamaPengguna).child("kataSandi").getValue(String.class);
                     if (passwordFromFB.equals(userEnteredPassword)) {
-                        tilUsername.setError(null);
-                        tilUsername.setErrorEnabled(false);
+                        tilKataSandi.setError(null);
+                        tilKataSandi.setErrorEnabled(false);
 
-                        String usernameFromFB = snapshot.child(userEnteredUsername).child("username").getValue(String.class);
-                        String emailFromFB = snapshot.child(userEnteredUsername).child("email").getValue(String.class);
+                        String namaPenggunaFromFB = snapshot.child(userEnteredNamaPengguna).child("namaPengguna").getValue(String.class);
+                        String surelFromFB = snapshot.child(userEnteredNamaPengguna).child("surel").getValue(String.class);
+                        String nomorHandphoneFromFB = snapshot.child(userEnteredNamaPengguna).child("nomorHandphone").getValue(String.class);
 
                         Intent intent = new Intent(getApplicationContext(), Profile.class);
-                        intent.putExtra("username", usernameFromFB);
-                        intent.putExtra("email", emailFromFB);
-                        intent.putExtra("password", passwordFromFB);
+
+                        intent.putExtra("surel", surelFromFB);
+                        intent.putExtra("namaPengguna", namaPenggunaFromFB);
+                        intent.putExtra("nomorHandphone", nomorHandphoneFromFB);
+                        intent.putExtra("kataSandi", passwordFromFB);
 
                         startActivity(intent);
                     } else {
-                        tilPassword.setError("Wrong Password");
-                        tilPassword.requestFocus();
+                        tilKataSandi.setError("Kata Sandi Salah");
+                        tilKataSandi.requestFocus();
                     }
                 } else {
-                    tilUsername.setError("No such User Exist");
-                    tilUsername.requestFocus();
+                    tilNamaPengguna.setError("Nama Pengguna Tidak Ditemukan");
+                    tilNamaPengguna.requestFocus();
                 }
             }
 
@@ -135,19 +147,19 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void animationLayout() {
-//        Animation
-        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
-        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
+    public void callRegister(View view) {
+        Intent intent = new Intent(getApplicationContext(), Register.class);
 
-//        Set Animation
-        ivHero.setAnimation(topAnim);
-        tvName.setAnimation(topAnim);
-        tvSlogan.setAnimation(topAnim);
-        tilUsername.setAnimation(topAnim);
-        tilPassword.setAnimation(topAnim);
-        cbRememberMe.setAnimation(bottomAnim);
-        btnLupaKataSandi.setAnimation(bottomAnim);
-        btnLogin.setAnimation(bottomAnim);
+        Pair[] pairs = new Pair[3];
+        pairs[0] = new Pair<View, String>(findViewById(R.id.imageHero), "catbot_image_hero");
+        pairs[1] = new Pair<View, String>(findViewById(R.id.textNama), "catbot_text_nama");
+        pairs[2] = new Pair<View, String>(findViewById(R.id.textDeskripsi), "catbot_text_deskripsi");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Login.this, pairs);
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
     }
 }

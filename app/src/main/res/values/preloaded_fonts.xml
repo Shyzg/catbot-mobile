@@ -4,5 +4,7 @@
         <item>@font/comfortaa</item>
         <item>@font/comfortaa_bold</item>
         <item>@font/comfortaa_light</item>
+        <item>@font/lilita_one</item>
+        <item>@font/ubuntu_mono</item>
     </array>
 </resources>

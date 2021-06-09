@@ -3,25 +3,30 @@
     package="com.programmingtechniques.uas">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/catbot_icon_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/catbot_icon_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.UAS">
-        <activity android:name=".SplashScreen">
+        <activity
+            android:name=".SplashScreen"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Users.Welcome" />
-        <activity android:name=".Users.Login" />
-        <activity android:name=".Users.RegisterFirst" />
-        <activity android:name=".Users.RegisterThird" />
-        <activity android:name=".Users.RegisterSecond" />
-        <activity android:name=".Profile" />
+        <activity
+            android:name=".Welcome"
+            android:noHistory="true" />
+        <activity
+            android:name=".Users.Login"
+            android:noHistory="true" />
+        <activity android:name=".Users.Register" />
+        <activity android:name=".Users.Verification" />
+        <activity android:name=".Menu.Home" />
+        <activity android:name=".Menu.Profile" />
 
         <meta-data
             android:name="preloaded_fonts"

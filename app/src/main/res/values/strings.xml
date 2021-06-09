@@ -1,17 +1,26 @@
 <resources>
     <string name="app_name">CatBot</string>
-    <string name="profile">Profile</string>
-    <string name="slogan">Atur Bot Ini Dalam Server Discordmu!</string>
-    <string name="loginName">Selamat Datang!</string>
-    <string name="loginSlogan">Masuk Kedalam Akunmu Untuk Melanjutkan…</string>
-    <string name="loginHintEmail">Email</string>
-    <string name="loginHintPassword">Password</string>
-    <string name="loginButtonName">Masuk</string>
-    <string name="loginButtonGoRegister">Belum Memiliki Akun? Daftar Disini.</string>
-    <string name="welcomeName">Atur CatBot Ini</string>
-    <string name="welcomeSlogan">Yang Berada Didalam Sever Discord-mu!</string>
+    <string name="app_description">Atur Bot Ini Dalam Server Discordmu!</string>
+    <string name="welcomeTextNama">Atur CatBot Ini</string>
+    <string name="welcomeTextDeskripsi">Yang Berada Didalam Sever Discord-mu!</string>
+    <string name="loginTextNama">Selamat Datang!</string>
+    <string name="loginTextDeskripsi">Masuk Kedalam Akunmu Untuk Melanjutkan…</string>
+    <string name="registerFirstTextNama">Pastikan Kamu</string>
+    <string name="registerFirstTextDeskripsi">Memasukkan Surel Dengan Benar…</string>
+    <string name="verificationNama">Kode</string>
+    <string name="verificationDeskripsi">Verifikasi Dikirimkan Ke Nomor</string>
+    <string name="homeTextName">CatBot Commands.</string>
+    <string name="homeTextDeskripsi">Kalian Dapat Melihat Seluruh Perintah Beserta Kegunaannya Disini.</string>
     <string name="buttonMasuk">Masuk</string>
     <string name="buttonDaftar">Daftar</string>
-    <string name="checkboxRememberMe">Ingat Aku</string>
+    <string name="buttonLanjut">Lanjut</string>
+    <string name="buttonUbah">Ubah</string>
+    <string name="buttonKirimKode">Kirim Kode</string>
     <string name="buttonLupaKataSandi">Lupa Kata Sandi?</string>
+    <string name="buttonVerifikasi">Verifikasi</string>
+    <string name="checkboxIngatAku">Ingat Aku</string>
+    <string name="inputNamaPengguna">Nama Pengguna</string>
+    <string name="inputSurel">Surel</string>
+    <string name="inputKataSandi">Kata Sandi</string>
+    <string name="inputNomorHandphone">Nomor Handphone</string>
 </resources>

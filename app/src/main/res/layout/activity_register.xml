@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_300"
+    android:backgroundTintMode="screen"
+    tools:context=".Users.Register">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/catbot_background_register">
+
+        <ImageView
+            android:id="@+id/imageHero"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:contentDescription="@string/app_name"
+            android:transitionName="catbot_image_hero"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/catbot_hero_1a" />
+
+        <TextView
+            android:id="@+id/textNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageHero"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:text="@string/registerFirstTextNama"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:transitionName="catbot_text_nama" />
+
+        <TextView
+            android:id="@+id/textDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textNama"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/comfortaa_light"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:text="@string/registerFirstTextDeskripsi"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:transitionName="catbot_text_deskripsi" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputRegisterNamaPengguna"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textDeskripsi"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/inputNamaPengguna"
+            android:textAlignment="center"
+            android:textColorHint="@color/white"
+            android:transitionName="catbot_input_namapengguna"
+            app:boxStrokeColor="@color/white"
+            app:endIconMode="clear_text"
+            app:errorIconDrawable="@drawable/catbot_icon_error"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/catbot_icon_user"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputRegisterSurel"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inputRegisterNamaPengguna"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/inputSurel"
+            android:textColorHint="@color/white"
+            android:transitionName="catbot_input_surel"
+            app:boxStrokeColor="@color/white"
+            app:endIconMode="clear_text"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/catbot_icon_at"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputRegisterKataSandi"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inputRegisterSurel"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/inputKataSandi"
+            android:transitionName="catbot_input_katasandi"
+            app:boxStrokeColor="@color/black"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/catbot_icon_key">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputRegisterNomorHandphone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inputRegisterKataSandi"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/inputNomorHandphone"
+            android:transitionName="catbot_input_nomorhandphone"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputRegisterKataSandi"
+            app:startIconDrawable="@drawable/catbot_icon_phone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text|phone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonKirimKode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inputRegisterNomorHandphone"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/black"
+            android:backgroundTintMode="screen"
+            android:fontFamily="@font/comfortaa_bold"
+            android:onClick="callLanjut"
+            android:text="@string/buttonLanjut"
+            android:textAllCaps="false"
+            android:transitionName="catbot_button_lanjut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputRegisterNomorHandphone" />
+
+        <Button
+            android:id="@+id/buttonCallLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonKirimKode"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/white"
+            android:backgroundTintMode="screen"
+            android:fontFamily="@font/comfortaa_bold"
+            android:onClick="callLogin"
+            android:text="@string/buttonMasuk"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:transitionName="catbot_button_calllogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonKirimKode" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
