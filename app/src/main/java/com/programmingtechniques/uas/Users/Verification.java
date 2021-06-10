@@ -72,6 +72,7 @@ public class Verification extends AppCompatActivity {
         public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             verifikasiId = s;
+            Toast.makeText(getApplicationContext(), "Kode Telah Dikirim!", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -85,7 +86,6 @@ public class Verification extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(getApplicationContext(), "Kode Verifikasi Salah!", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -102,7 +102,7 @@ public class Verification extends AppCompatActivity {
                     buatAkunPengguna();
                 } else {
                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                        Toast.makeText(getApplicationContext(), "Verifikasi Gagal, Coba Lagi!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Kode Verifikasi Salah!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
