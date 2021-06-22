@@ -37,19 +37,16 @@ public class SplashScreen extends AppCompatActivity {
         ivHero.setAnimation(topAnim);
         tvNama.setAnimation(bottomAnim);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), Welcome.class);
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(getApplicationContext(), Welcome.class);
 
-                Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
-                pairs[1] = new Pair<View, String>(tvNama, "catbot_text_nama");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this, pairs);
-                    startActivity(intent, options.toBundle());
-                    finish();
-                }
+            Pair[] pairs = new Pair[2];
+            pairs[0] = new Pair<View, String>(ivHero, "catbot_image_hero");
+            pairs[1] = new Pair<View, String>(tvNama, "catbot_text_nama");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SplashScreen.this, pairs);
+                startActivity(intent, options.toBundle());
+                finish();
             }
         }, SS);
     }
